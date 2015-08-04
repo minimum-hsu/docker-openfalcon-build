@@ -8,6 +8,10 @@ mkdir -p $GOPATH/src/github.com
 cd $GOPATH/src/github.com
 git clone --recursive https://github.com/XiaoMi/open-falcon.git
 
+mkdir -p $GOPATH/src/minimum
+cd $GOPATH/src/minimum
+git clone --recursive https://github.com/minimum-hsu/fe.git
+
 #######################################
 # Build, Package, Rename and Collect
 #######################################
@@ -110,7 +114,8 @@ mv $PACKFILE $PACKDIR/$NEWFILE && \
   echo $PACKFILE >> $LOGFILE
 
 # FE
-cd $GOPATH/src/github.com/open-falcon/fe
+# cd $GOPATH/src/github.com/open-falcon/fe
+cd $GOPATH/src/minimum/fe
 go get ./...
 ./control build
 ./control pack
