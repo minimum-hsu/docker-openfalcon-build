@@ -6,10 +6,10 @@
 rm -fR $GOPATH/src
 mkdir -p $GOPATH/src/github.com
 cd $GOPATH/src/github.com
-git clone --recursive https://github.com/XiaoMi/open-falcon.git
+git clone --recursive https://github.com/minimum-hsu/open-falcon.git
 
-mkdir -p $GOPATH/src/minimum
-cd $GOPATH/src/minimum
+mkdir -p $GOPATH/src/github.com/minimum
+cd $GOPATH/src/github.com/minimum
 git clone --recursive https://github.com/minimum-hsu/fe.git
 
 #######################################
@@ -115,7 +115,7 @@ mv $PACKFILE $PACKDIR/$NEWFILE && \
 
 # FE
 # cd $GOPATH/src/github.com/open-falcon/fe
-cd $GOPATH/src/minimum/fe
+cd $GOPATH/src/github.com/minimum/fe
 go get ./...
 ./control build
 ./control pack
