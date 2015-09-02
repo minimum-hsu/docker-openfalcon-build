@@ -6,7 +6,10 @@
 rm -fR $GOPATH/src
 mkdir -p $GOPATH/src/github.com
 cd $GOPATH/src/github.com
-git clone --recursive https://github.com/minimum-hsu/open-falcon.git
+git clone --recursive https://github.com/minimum-hsu/open-falcon.git -b send2qq
+cd open-falcon
+git checkout origin/send2qq
+git submodule update --remote --recursive
 
 mkdir -p $GOPATH/src/github.com/minimum
 cd $GOPATH/src/github.com/minimum
