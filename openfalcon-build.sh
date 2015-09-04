@@ -6,13 +6,9 @@
 rm -fR $GOPATH/src
 mkdir -p $GOPATH/src/github.com
 cd $GOPATH/src/github.com
-git clone --recursive -b send2qq https://github.com/minimum-hsu/open-falcon.git
+git clone --recursive https://github.com/Cepave/open-falcon.git open-falcon
 cd open-falcon
 git submodule update --remote --init
-
-mkdir -p $GOPATH/src/github.com/minimum
-cd $GOPATH/src/github.com/minimum
-git clone --recursive https://github.com/minimum-hsu/fe.git
 
 #######################################
 # Build, Package, Rename and Collect
@@ -75,7 +71,7 @@ mv $PACKFILE $PACKDIR/$NEWFILE && \
   echo "Success... $NEWFILE" && \
   echo $PACKFILE >> $LOGFILE
 
-# Link
+# Links
 cd $GOPATH/src/github.com/open-falcon/links
 ./control pack
 PACKFILE=$(find -name "*link*.gz")
@@ -116,8 +112,7 @@ mv $PACKFILE $PACKDIR/$NEWFILE && \
   echo $PACKFILE >> $LOGFILE
 
 # FE
-# cd $GOPATH/src/github.com/open-falcon/fe
-cd $GOPATH/src/github.com/minimum/fe
+cd $GOPATH/src/github.com/open-falcon/fe
 go get ./...
 ./control build
 ./control pack
