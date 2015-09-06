@@ -21,17 +21,17 @@ You can specify one or more components to build, like
 $sudo docker run -d --rm=true -v /tmp/pack:/package openfalcon-build agent fe portal
 ```
 
-Components:
-agent
-graph
-query
-dashboard
-sender
-links
-portal
-hbs
-alarm
-fe
-judge
-transfer
-task
+Components:  
+agent  
+graph  
+query  
+dashboard  
+sender  
+links  
+portal  
+hbs  
+alarm  
+fe  
+judge  
+transfer  
+task 
