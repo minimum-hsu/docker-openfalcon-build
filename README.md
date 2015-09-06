@@ -12,5 +12,26 @@ $sudo docker build --force-rm=true -t openfalcon-build .
 
 ```
 $mkdir /tmp/pack
-$sudo docker run -ti --name builder -v /tmp/pack:/package openfalcon-build
+$sudo docker run -d --rm=true -v /tmp/pack:/package openfalcon-build
 ```
+
+You can specify one or more components to build, like
+
+```
+$sudo docker run -d --rm=true -v /tmp/pack:/package openfalcon-build agent fe portal
+```
+
+Components:
+agent
+graph
+query
+dashboard
+sender
+links
+portal
+hbs
+alarm
+fe
+judge
+transfer
+task
