@@ -74,6 +74,7 @@ for arg in "$@" ; do
     ;;
   *)
     echo -e "Specify one component to build:\nagent\ngraph\nquery\ndashboard\nsender\nlinks\nportal\nhbs\nalarm\nfe\njudge\ntransfer\ntask"
+    exit 1
     ;;
   esac
 done
