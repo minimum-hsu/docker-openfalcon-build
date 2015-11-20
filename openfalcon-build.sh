@@ -57,6 +57,9 @@ for arg in "$@" ; do
   "task")
     BUILD_TASK=true
     ;;
+  "nodata")
+    BUILD_NODATA=true
+    ;;
   "all")
     BUILD_AGENT=true
     BUILD_GRAPH=true
@@ -71,9 +74,11 @@ for arg in "$@" ; do
     BUILD_JUDGE=true
     BUILD_TRANSFER=true
     BUILD_TASK=true
+    BUILD_NODATA=true
     ;;
   *)
-    echo -e "Specify one component to build:\nagent\ngraph\nquery\ndashboard\nsender\nlinks\nportal\nhbs\nalarm\nfe\njudge\ntransfer\ntask"
+    echo -e "Specify one component to build:\nagent\ngraph\nquery\ndashboard\nsender\nlinks\nportal\nhbs\nalarm\nfe\njudge\ntransfer\ntask\nnodata"
+    exit 1
     ;;
   esac
 done
@@ -244,6 +249,19 @@ if [ ! -z $BUILD_TASK ] && $BUILD_TASK ; then
   ./control build
   ./control pack
   PACKFILE=$(find -name "*task*.gz")
+  NEWFILE="$(echo ${PACKFILE##*/} | sed -e 's/-[.0-9]*\.tar.gz/.tar.gz/')"
+  mv $PACKFILE $PACKDIR/$NEWFILE && \
+    echo "Success... $NEWFILE" && \
+    echo $PACKFILE >> $LOGFILE
+fi
+
+# Nodata
+if [ ! -z $BUILD_NODATA ] && $BUILD_NODATA ; then
+  cd $GOPATH/src/github.com/open-falcon/nodata
+  go get ./...
+  ./control build
+  ./control pack
+  PACKFILE=$(find -name "*nodata*.gz")
   NEWFILE="$(echo ${PACKFILE##*/} | sed -e 's/-[.0-9]*\.tar.gz/.tar.gz/')"
   mv $PACKFILE $PACKDIR/$NEWFILE && \
     echo "Success... $NEWFILE" && \
