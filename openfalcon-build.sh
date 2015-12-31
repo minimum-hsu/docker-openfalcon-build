@@ -60,6 +60,9 @@ for arg in "$@" ; do
   "nodata")
     BUILD_NODATA=true
     ;;
+  "aggregator")
+    BUILD_AGGREGATOR=true
+    ;;
   "all")
     BUILD_AGENT=true
     BUILD_GRAPH=true
@@ -75,9 +78,10 @@ for arg in "$@" ; do
     BUILD_TRANSFER=true
     BUILD_TASK=true
     BUILD_NODATA=true
+    BUILD_AGGREGATOR=true
     ;;
   *)
-    echo -e "Specify one component to build:\nagent\ngraph\nquery\ndashboard\nsender\nlinks\nportal\nhbs\nalarm\nfe\njudge\ntransfer\ntask\nnodata"
+    echo -e "Specify one component to build:\nagent\ngraph\nquery\ndashboard\nsender\nlinks\nportal\nhbs\nalarm\nfe\njudge\ntransfer\ntask\nnodata\naggregator"
     exit 1
     ;;
   esac
@@ -262,6 +266,19 @@ if [ ! -z $BUILD_NODATA ] && $BUILD_NODATA ; then
   ./control build
   ./control pack
   PACKFILE=$(find -name "*nodata*.gz")
+  NEWFILE="$(echo ${PACKFILE##*/} | sed -e 's/-[.0-9]*\.tar.gz/.tar.gz/')"
+  mv $PACKFILE $PACKDIR/$NEWFILE && \
+    echo "Success... $NEWFILE" && \
+    echo $PACKFILE >> $LOGFILE
+fi
+
+# Aggregator
+if [ ! -z $BUILD_AGGREGATOR ] && $BUILD_AGGREGATOR ; then
+  cd $GOPATH/src/github.com/open-falcon/aggregator
+  go get ./...
+  ./control build
+  ./control pack
+  PACKFILE=$(find -name "*aggregator*.gz")
   NEWFILE="$(echo ${PACKFILE##*/} | sed -e 's/-[.0-9]*\.tar.gz/.tar.gz/')"
   mv $PACKFILE $PACKDIR/$NEWFILE && \
     echo "Success... $NEWFILE" && \
