@@ -6,9 +6,10 @@
 rm -fR $GOPATH/src
 mkdir -p $GOPATH/src/github.com
 cd $GOPATH/src/github.com
-git clone --recursive https://github.com/Cepave/open-falcon.git open-falcon
+git clone --quiet -b master https://github.com/Cepave/open-falcon.git open-falcon
 cd open-falcon
-git submodule update --remote --init
+git submodule --quiet update --init --recursive
+git submodule --quiet foreach --recursive git checkout -f origin/master
 
 #######################################
 # Parse Arguments
