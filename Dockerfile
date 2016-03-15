@@ -7,7 +7,7 @@ VOLUME /package
 
 RUN \
   apt-get update && \
-  apt-get install -y git gcc
+  apt-get install -y git gcc make
 
 COPY openfalcon-build.sh /home/build.sh
 
