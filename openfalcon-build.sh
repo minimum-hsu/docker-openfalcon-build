@@ -27,6 +27,7 @@ set_git_modules
 git submodule --quiet update --init --recursive
 git submodule --quiet foreach --recursive git fetch --all
 git submodule --quiet foreach --recursive git reset --hard
+git submodule | awk -F " " '{ print $1 " " $2 }' > /package/submodules.txt
 go get github.com/rancher/trash
 ${GOPATH}/bin/trash --keep
 go get ./...
