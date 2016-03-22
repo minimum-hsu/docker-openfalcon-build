@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 export REMOTE=origin
 export BRANCH=new_layout
 export REPO=github.com/Cepave/open-falcon
