@@ -14,7 +14,7 @@ mkdir -p $WORKPATH
 git clone --quiet -b master https://github.com/Cepave/open-falcon.git $WORKPATH
 cd $WORKPATH && git submodule update --quiet --remote --init \
   && git submodule foreach --quiet git checkout -f $REMOTE/$BRANCH \
-  && git submodule foreach --quiet git submodule update --remote --init
+  && git submodule foreach --quiet git submodule update --quiet --remote --init
 
 #######################################
 # Parse Arguments
